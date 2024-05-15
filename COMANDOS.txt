@@ -1,0 +1,66 @@
+COMANDOS
+
+Configuración de VLANs en el switch SW1:
+
+SW1(config)#vlan 20
+SW1(config-vlan)#name Estudiantes
+SW1(config-vlan)#exit
+SW1(config)#interface range fastEthernet 0/7-10, gigabitEthernet 0/3-4
+SW1(config-if-range)#switchport mode access
+SW1(config-if-range)#switchport access vlan 20
+SW1(config-if-range)#exit
+
+SW1(config)#vlan 50
+SW1(config-vlan)#name PersonalHospital
+SW1(config-vlan)#exit
+SW1(config)#interface range fastEthernet 0/11-15, gigabitEthernet 0/5-6
+SW1(config-if-range)#switchport mode access
+SW1(config-if-range)#switchport access vlan 50
+SW1(config-if-range)#exit
+
+SW1(config)#vlan 55
+SW1(config-vlan)#name Servidores
+SW1(config-vlan)#exit
+SW1(config)#interface range fastEthernet 0/16-20, gigabitEthernet 0/7-8
+SW1(config-if-range)#switchport mode access
+SW1(config-if-range)#switchport access vlan 55
+SW1(config-if-range)#exit
+
+SW1(config)#vlan 60
+SW1(config-vlan)#name TelefonosHospital
+SW1(config-vlan)#exit
+SW1(config)#interface range fastEthernet 0/21-24, gigabitEthernet 0/9-10
+SW1(config-if-range)#switchport mode access
+SW1(config-if-range)#switchport access vlan 60
+SW1(config-if-range)#exit
+
+SW1(config)#interface vlan99
+SW1(config-if)#ip address 172.19.99.2 255.255.255.0
+SW1(config-if)#no shutdown
+SW1(config-if)#exit
+
+Verificación de VLANs creadas:
+SW1#show vlan brief
+
+Configuración básica del enrutador R_HOSP:
+R_HOSP(config)#interface serial 0/2/0
+R_HOSP(config-if)#ip address 161.130.4.2 255.255.255.252
+R_HOSP(config-if)#no shutdown
+R_HOSP(config-if)#exit
+
+Verificación de la configuración del enrutador R_HOSP:
+R_HOSP#show ip interface brief
+
+Verificación de la conectividad entre dispositivos:
+ping <dirección_IP_destino>
+
+
+
+
+
+VERIFICACIONES
+ipconfig //para ver la configuración de las IPs de los PC
+ping //verificar conexión entre dispositivos 
+telnet //verficar conexión de los PC con los Switches
+show vlan brief //verificar que las VLANs se hayan creado correctamente
+show spanning-tree //visualizar el protocolo de spanning tree
